@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang='sr'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Profesori i Predmeti</title>
+  <link rel='stylesheet' href='style.css'>
+</head>
+<body>
+  <nav class='navbar'>
+    <div class='nav-brand'>Profesori & Predmeti</div>
+    <div class='nav-links'>
+      <button onclick='showTab("professors")' class='tab-btn active'
+        id='tab-professors'>Profesori</button>
+      <button onclick='showTab("subjects")' class='tab-btn'
+        id='tab-subjects'>Predmeti</button>
+    </div>
+    <div id='user-info' class='user-info hidden'>
+      <span id='username-display'></span>
+      <span class='badge' id='role-badge'></span>
+      <button onclick='logout()' class='btn btn-danger'>Odjavi se</button>
+    </div>
+    <div id='auth-buttons'>
+      <button onclick='showModal("login")' class='btn btn-primary'>Prijava</button>
+      <button onclick='showModal("register")' class='btn btn-secondary'>Registracija</button>
+    </div>
+  </nav>
+ 
+  <main class='container'>
+    <!-- ALERT BOX -->
+    <div id='alert' class='alert hidden'></div>
+ 
+    <section id='professors-tab'>
+      <div class='section-header'>
+        <h2>Lista Profesora</h2>
+        <button onclick='showProfessorForm()' class='btn btn-primary admin-only hidden'>
+          + Dodaj Profesora
+        </button>
+      </div>
+      <div id='professors-grid' class='grid'></div>
+    </section>
+ 
+    <section id='subjects-tab' class='hidden'>
+      <div class='section-header'>
+        <h2>Lista Predmeta</h2>
+        <button onclick='showSubjectForm()' class='btn btn-primary admin-only hidden'>
+          + Dodaj Predmet
+        </button>
+      </div>
+      <div id='subjects-grid' class='grid'></div>
+    </section>
+  </main>
+ 
+  <div id='login-modal' class='modal-overlay hidden'>
+    <div class='modal'>
+      <h3>Prijava</h3>
+      <input type='text' id='login-username' placeholder='Username'>
+      <input type='password' id='login-password' placeholder='Lozinka'>
+      <button onclick='login()' class='btn btn-primary full-width'>Prijavi se</button>
+      <button onclick='closeModal()' class='btn btn-ghost full-width'>Otkaži</button>
+    </div>
+  </div>
+ 
+  <div id='register-modal' class='modal-overlay hidden'>
+    <div class='modal'>
+      <h3>Registracija</h3>
+      <input type='text' id='reg-username' placeholder='Username (min 3 karaktera)'>
+      <input type='email' id='reg-email' placeholder='Email'>
+      <input type='password' id='reg-password' placeholder='Lozinka (min 6 karaktera)'>
+      <select id='reg-role'>
+        <option value='USER'>Korisnik (USER)</option>
+        <option value='ADMIN'>Administrator (ADMIN)</option>
+      </select>
+      <button onclick='register()' class='btn btn-primary full-width'>Registruj se</button>
+      <button onclick='closeModal()' class='btn btn-ghost full-width'>Otkaži</button>
+    </div>
+  </div>
+ 
+  <div id='professor-modal' class='modal-overlay hidden'>
+    <div class='modal'>
+      <h3 id='professor-modal-title'>Dodaj Profesora</h3>
+      <input type='hidden' id='prof-id'>
+      <input type='text' id='prof-firstName' placeholder='Ime'>
+      <input type='text' id='prof-lastName' placeholder='Prezime'>
+      <input type='email' id='prof-email' placeholder='Email'>
+      <input type='text' id='prof-department' placeholder='Departman'>
+      <button onclick='saveProfessor()' class='btn btn-primary full-width'>Sačuvaj</button>
+      <button onclick='closeModal()' class='btn btn-ghost full-width'>Otkaži</button>
+    </div>
+  </div>
+
+  <div id='subject-modal' class='modal-overlay hidden'>
+    <div class='modal'>
+      <h3 id='subject-modal-title'>Dodaj Predmet</h3>
+      <input type='hidden' id='subj-id'>
+      <input type='text' id='subj-name' placeholder='Naziv predmeta'>
+      <textarea id='subj-description' placeholder='Opis predmeta'></textarea>
+      <input type='number' id='subj-espb' placeholder='ESPB (1-60)' min='1' max='60'>
+      <input type='number' id='subj-semester' placeholder='Semestar (1-10)' min='1' max='10'>
+      <select id='subj-professor'>
+        <option value=''>Izaberi profesora</option>
+      </select>
+      <button onclick='saveSubject()' class='btn btn-primary full-width'>Sačuvaj</button>
+      <button onclick='closeModal()' class='btn btn-ghost full-width'>Otkaži</button>
+    </div>
+  </div>
+ 
+  <script src='app.js'></script>
+</body>
+</html>
