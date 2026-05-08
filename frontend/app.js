@@ -28,10 +28,10 @@ async function register() {
   const username = document.getElementById('reg-username').value;
   const email    = document.getElementById('reg-email').value;
   const password = document.getElementById('reg-password').value;
-  const regRole  = document.getElementById('reg-role').value;
+  // const regRole  = document.getElementById('reg-role').value;
   try {
     const res = await apiPost('/auth/register',
-      { username, email, password, role: regRole }, false);
+      { username, email, password }, false);
     token = res.token; role = res.role;
     localStorage.setItem('token', token);
     localStorage.setItem('role', role);

@@ -28,16 +28,14 @@ public class AuthService {
                     "Email '" + req.getEmail() + "' je vec registrovan");
         }
 
-        // Odredjuje role (default USER)
         User.Role role = User.Role.USER;
-        if ("ADMIN".equalsIgnoreCase(req.getRole())) {
-            role = User.Role.ADMIN;
-        }
+//        if ("ADMIN".equalsIgnoreCase(req.getRole())) {
+//            role = User.Role.ADMIN;
+//        }
 
         User user = User.builder()
                 .username(req.getUsername())
                 .email(req.getEmail())
-                // BCrypt hashuje lozinku!
                 .password(passwordEncoder.encode(req.getPassword()))
                 .role(role)
                 .build();
@@ -51,7 +49,6 @@ public class AuthService {
     }
 
     public AuthResponse login(LoginRequest req) {
-        // Spring proverava username i password
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         req.getUsername(), req.getPassword()));
@@ -63,6 +60,6 @@ public class AuthService {
                 user.getUsername(), user.getRole().name());
 
         return new AuthResponse(token, user.getUsername(),
-                user.getRole().name(), "Login uspesa!");
+                user.getRole().name(), "Login uspesan!");
     }
 }
