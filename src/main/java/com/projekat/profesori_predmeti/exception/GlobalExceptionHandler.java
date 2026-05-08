@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleNotFound(
             ResourceNotFoundException ex) {
@@ -22,7 +21,6 @@ public class GlobalExceptionHandler {
                         .build());
     }
 
-    // Hendluje greshe validacije (@Valid)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidation(
             MethodArgumentNotValidException ex) {
@@ -40,7 +38,6 @@ public class GlobalExceptionHandler {
                         .build());
     }
 
-    // Hendluje IllegalArgumentException (400)
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorResponse> handleBadRequest(
             IllegalArgumentException ex) {
@@ -53,7 +50,6 @@ public class GlobalExceptionHandler {
                         .build());
     }
 
-    // Catch-all za ostale greshe (500)
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleAll(Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
