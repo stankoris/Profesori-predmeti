@@ -10,5 +10,4 @@ public interface ProfessorRepository extends JpaRepository<Professor, Long> {
 
     Optional<Professor> findByEmail(String email);
     boolean existsByEmail(String email);
-    java.util.List<Professor> findByDepartment(String department);
 }

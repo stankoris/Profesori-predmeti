@@ -8,7 +8,7 @@
 </head>
 <body>
   <nav class='navbar'>
-    <div class='nav-brand'>Profesori & Predmeti</div>
+    <div class='nav-brand'>Profesori - Predmeti</div>
     <div class='nav-links'>
       <button onclick='showTab("professors")' class='tab-btn active'
         id='tab-professors'>Profesori</button>
@@ -57,6 +57,10 @@
       <input type='password' id='login-password' placeholder='Lozinka'>
       <button onclick='login()' class='btn btn-primary full-width'>Prijavi se</button>
       <button onclick='closeModal()' class='btn btn-ghost full-width'>Otkaži</button>
+      <div>
+        <span>Admin username: admin | password: admin123</span>
+        <span>User username: user | password: user123</span>
+      </div>
     </div>
   </div>
  
@@ -66,10 +70,6 @@
       <input type='text' id='reg-username' placeholder='Username (min 3 karaktera)'>
       <input type='email' id='reg-email' placeholder='Email'>
       <input type='password' id='reg-password' placeholder='Lozinka (min 6 karaktera)'>
-      <!-- <select id='reg-role'>
-        <option value='USER'>Korisnik (USER)</option>
-        <option value='ADMIN'>Administrator (ADMIN)</option>
-      </select> -->
       <button onclick='register()' class='btn btn-primary full-width'>Registruj se</button>
       <button onclick='closeModal()' class='btn btn-ghost full-width'>Otkaži</button>
     </div>
@@ -79,10 +79,12 @@
     <div class='modal'>
       <h3 id='professor-modal-title'>Dodaj Profesora</h3>
       <input type='hidden' id='prof-id'>
+      <label for='subj-semester'>Ime:</label>
       <input type='text' id='prof-firstName' placeholder='Ime'>
+      <label for='subj-semester'>Prezime:</label>
       <input type='text' id='prof-lastName' placeholder='Prezime'>
+      <label for='subj-semester'>Email:</label>
       <input type='email' id='prof-email' placeholder='Email'>
-      <input type='text' id='prof-department' placeholder='Departman'>
       <button onclick='saveProfessor()' class='btn btn-primary full-width'>Sačuvaj</button>
       <button onclick='closeModal()' class='btn btn-ghost full-width'>Otkaži</button>
     </div>
@@ -92,10 +94,15 @@
     <div class='modal'>
       <h3 id='subject-modal-title'>Dodaj Predmet</h3>
       <input type='hidden' id='subj-id'>
+      <label for='subj-semester'>Naziv predmeta:</label>
       <input type='text' id='subj-name' placeholder='Naziv predmeta'>
+      <label for='subj-semester'>Opis predmeta:</label>
       <textarea id='subj-description' placeholder='Opis predmeta'></textarea>
+      <label for='subj-espb'>ESPB:</label>
       <input type='number' id='subj-espb' placeholder='ESPB (1-60)' min='1' max='60'>
+      <label for='subj-semester'>Semestar:</label>
       <input type='number' id='subj-semester' placeholder='Semestar (1-10)' min='1' max='10'>
+      <label for='subj-professor'>Profesor:</label>
       <select id='subj-professor'>
         <option value=''>Izaberi profesora</option>
       </select>
@@ -104,6 +111,6 @@
     </div>
   </div>
  
-  <script src='app.js'></script>
+  <script src='index.js'></script>
 </body>
 </html>

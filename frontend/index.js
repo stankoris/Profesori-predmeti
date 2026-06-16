@@ -28,7 +28,7 @@ async function register() {
   const username = document.getElementById('reg-username').value;
   const email    = document.getElementById('reg-email').value;
   const password = document.getElementById('reg-password').value;
-  // const regRole  = document.getElementById('reg-role').value;
+
   try {
     const res = await apiPost('/auth/register',
       { username, email, password }, false);
@@ -51,6 +51,7 @@ function logout() {
     el => el.classList.add('hidden'));
   showAlert('Odjavili ste se', 'success');
   loadProfessors();
+  location.reload();
 }
  
 function updateUIAfterLogin() {
@@ -93,8 +94,7 @@ async function loadProfessors() {
       <div class='card'>
         <div class='card-title'>${p.firstName} ${p.lastName}</div>
         <div class='card-meta'>Email: ${p.email}</div>
-        <div class='card-meta'>Departman:
-          <span class='tag'>${p.department}</span></div>
+
         <div class='card-actions admin-only
           ${role !== 'ADMIN' ? 'hidden' : ''}'>
           <button class='btn btn-secondary'
@@ -113,7 +113,6 @@ function showProfessorForm(p = null) {
   document.getElementById('prof-firstName').value = p?.firstName || '';
   document.getElementById('prof-lastName').value  = p?.lastName || '';
   document.getElementById('prof-email').value     = p?.email || '';
-  document.getElementById('prof-department').value= p?.department || '';
   showModal('professor');
 }
  
@@ -128,7 +127,6 @@ async function saveProfessor() {
     firstName:  document.getElementById('prof-firstName').value,
     lastName:   document.getElementById('prof-lastName').value,
     email:      document.getElementById('prof-email').value,
-    department: document.getElementById('prof-department').value
   };
   try {
     if (id) await apiPut('/professors/' + id, dto);
@@ -149,7 +147,11 @@ async function deleteProfessor(id) {
  
 // CRUD: Predmeti
 async function loadSubjects() {
-  if (!token) return;
+  if (!token) {
+    document.getElementById('subjects-grid').innerHTML =
+      '<p style="color:#64748B">Prijavite se da vidite podatke.</p>';
+    return;
+  }
   try {
     const data = await apiGet('/subjects');
     const grid = document.getElementById('subjects-grid');
@@ -159,7 +161,7 @@ async function loadSubjects() {
         <div class='card-meta'>Profesor: ${s.professorName}</div>
         <div class='card-meta'>
           <span class='tag'>ESPB: ${s.espb}</span>
-          <span class='tag'>Sem: ${s.semester}</span>
+          <span class='tag'>Semester: ${s.semester}</span>
         </div>
         ${s.description ? `<div class='card-meta' style='margin-top:8px'>
           ${s.description}</div>` : ''}

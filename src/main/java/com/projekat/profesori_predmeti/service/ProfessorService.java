@@ -49,7 +49,6 @@ public class ProfessorService {
         existing.setFirstName(dto.getFirstName());
         existing.setLastName(dto.getLastName());
         existing.setEmail(dto.getEmail());
-        existing.setDepartment(dto.getDepartment());
         return toDTO(professorRepository.save(existing));
     }
 
@@ -68,7 +67,6 @@ public class ProfessorService {
                 .firstName(p.getFirstName())
                 .lastName(p.getLastName())
                 .email(p.getEmail())
-                .department(p.getDepartment())
                 .createdAt(p.getCreatedAt() != null
                         ? p.getCreatedAt().toString() : null)
                 .build();
@@ -79,7 +77,6 @@ public class ProfessorService {
                 .firstName(dto.getFirstName())
                 .lastName(dto.getLastName())
                 .email(dto.getEmail())
-                .department(dto.getDepartment())
                 .build();
     }
 }

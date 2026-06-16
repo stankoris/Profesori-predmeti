@@ -23,8 +23,5 @@ public class ProfessorDTO {
     @Email(message = "Nevalidan format email adrese")
     private String email;
 
-    @NotBlank(message = "Departman je obavezan")
-    private String department;
-
     private String createdAt;
 }
